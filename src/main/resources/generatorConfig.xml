@@ -31,7 +31,7 @@
 
         <!-- 配置需要生成的Map方法 -->
         <table schema=""
-               tableName="material"
+               tableName="password"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"
@@ -39,31 +39,5 @@
                selectByExampleQueryId="false">
         </table>
 
-        <table schema=""
-               tableName="note"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table schema=""
-               tableName="sign_in"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
-
-        <table schema=""
-               tableName="user"
-               enableCountByExample="false"
-               enableUpdateByExample="false"
-               enableDeleteByExample="false"
-               enableSelectByExample="false"
-               selectByExampleQueryId="false">
-        </table>
     </context>
 </generatorConfiguration>
