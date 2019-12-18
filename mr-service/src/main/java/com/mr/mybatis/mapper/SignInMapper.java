@@ -3,7 +3,6 @@ package com.mr.mybatis.mapper;
 import com.mr.mybatis.model.SignIn;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 
 @Repository
