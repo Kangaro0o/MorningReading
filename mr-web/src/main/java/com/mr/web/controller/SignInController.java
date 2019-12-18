@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -50,7 +52,9 @@ public class SignInController {
     @PostMapping("/validatePwd")
     public Result validatePwd(@RequestParam(value = "password") String password) {
         Result result = new Result();
-        if (passwordService.validate(password, "2019-10-01")) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date(System.currentTimeMillis());
+        if (passwordService.validate(password, sdf.format(today))) {
             result.setCode(ResultStatus.SUCCESS.value());
             result.setMessage("密码验证成功");
         } else {
