@@ -1,8 +1,11 @@
 package com.mr.service;
 
-import org.springframework.stereotype.Service;
+import com.mr.mybatis.mapper.NoteMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 public class MainService {
-
+    @Autowired
+    NoteMapper noteMapper;
 }

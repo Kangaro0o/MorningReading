@@ -1,3 +1,8 @@
 .idea/
 /src/test/
 /target/
+/mr-service/target/
+/mr-web/target/
+/mr-web/test/
+/mr-service/test/
+MorningReading.iml
