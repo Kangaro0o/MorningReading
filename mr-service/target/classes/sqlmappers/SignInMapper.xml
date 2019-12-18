@@ -66,4 +66,18 @@
       time = #{time,jdbcType=DATE}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
+
+  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    count (sid)
+    from sign_in
+    where uid = #{uid}
+  </select>
+
+  <select id="getList" resultType="com.mr.mybatis.model.SignIn" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    from sign_in
+    where uid = #{uid}
+  </select>
 </mapper>
