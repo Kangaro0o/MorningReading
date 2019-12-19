@@ -5,9 +5,16 @@
     <id column="mid" property="mid" jdbcType="INTEGER" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="file_path" property="filePath" jdbcType="VARCHAR" />
-    <result column="auido_path" property="auidoPath" jdbcType="VARCHAR" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="MaterialListResultMap" type="com.mr.mybatis.dto.MaterialListResult">
+    <result column="upload_time" property="date" />
+    <collection property="articles" ofType="com.mr.mybatis.bo.Article" >
+      <id property="contentId" column="mid" />
+      <result property="title" column="name" />
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List" >
     mid, name, file_path, auido_path, uid
   </sql>
@@ -90,4 +97,10 @@
       uid = #{uid,jdbcType=VARCHAR}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" resultMap="MaterialListResultMap" resultType="list">
+    select mid, `name`, upload_time
+    from material
+    order by mid desc
+  </select>
 </mapper>

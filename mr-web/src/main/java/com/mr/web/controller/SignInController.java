@@ -77,8 +77,8 @@ public class SignInController {
      * 获取某个用户的所有签到列表
      */
     @ResponseBody
-    @GetMapping(value = "/getcheckinarr/uid/{uid}")
-    public Result<SingleSignInResult> getList(@PathVariable("uid") String uid) {
+    @GetMapping(value = "/getcheckinarr/userid/{userid}")
+    public Result<SingleSignInResult> getList(@PathVariable("userid") String uid) {
         SingleSignInResult res = signInService.getList(uid);
         return new Result<>(ResultStatus.SUCCESS, res);
     }

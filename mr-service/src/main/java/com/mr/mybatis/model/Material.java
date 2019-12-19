@@ -7,8 +7,6 @@ public class Material {
 
     private String filePath;
 
-    private String auidoPath;
-
     private String uid;
 
     public Integer getMid() {
@@ -33,14 +31,6 @@ public class Material {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
-    }
-
-    public String getAuidoPath() {
-        return auidoPath;
-    }
-
-    public void setAuidoPath(String auidoPath) {
-        this.auidoPath = auidoPath;
     }
 
     public String getUid() {

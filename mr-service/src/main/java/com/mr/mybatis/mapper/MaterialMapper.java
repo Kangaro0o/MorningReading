@@ -1,6 +1,9 @@
 package com.mr.mybatis.mapper;
 
+import com.mr.mybatis.dto.MaterialListResult;
 import com.mr.mybatis.model.Material;
+
+import java.util.List;
 
 public interface MaterialMapper {
     int deleteByPrimaryKey(Integer mid);
@@ -14,4 +17,6 @@ public interface MaterialMapper {
     int updateByPrimaryKeySelective(Material record);
 
     int updateByPrimaryKey(Material record);
+
+    List<MaterialListResult> getAll();
 }
