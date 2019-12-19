@@ -4,20 +4,15 @@ import com.mr.common.Result;
 import com.mr.common.ResultStatus;
 import com.mr.mybatis.model.Note;
 import com.mr.service.NoteService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -64,6 +59,7 @@ public class NoteController {
         }else {
             result=new Result<>(ResultStatus.SUCCESS);
         }
+
         return result;
     }
 

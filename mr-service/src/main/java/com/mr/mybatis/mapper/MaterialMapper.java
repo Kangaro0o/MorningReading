@@ -5,7 +5,7 @@ import com.mr.mybatis.model.Material;
 public interface MaterialMapper {
     int deleteByPrimaryKey(Integer mid);
 
-    int insert(Material record);
+    int upload(Material material);
 
     int insertSelective(Material record);
 
