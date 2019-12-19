@@ -2,8 +2,9 @@ package com.mr.mybatis.mapper;
 
 import com.mr.mybatis.model.Note;
 
+import java.util.List;
+
 public interface NoteMapper {
-    int deleteByPrimaryKey(Integer nid);
 
     int insert(Note record);
 
@@ -14,4 +15,10 @@ public interface NoteMapper {
     int updateByPrimaryKeySelective(Note record);
 
     int updateByPrimaryKey(Note record);
+
+    List<Note> findByUid(String uid);
+
+    public Note findByNid(Integer nid);
+
+    public Integer deleteByNid(Integer nid);
 }

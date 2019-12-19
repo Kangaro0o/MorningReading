@@ -3,12 +3,13 @@
 <mapper namespace="com.mr.mybatis.mapper.NoteMapper" >
   <resultMap id="BaseResultMap" type="com.mr.mybatis.model.Note" >
     <id column="nid" property="nid" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="INTEGER" />
-    <result column="date" property="date" jdbcType="TIMESTAMP" />
+    <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="date" property="date" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="text" property="text" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    nid, uid, date, text
+    nid, uid, date,title, text
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -16,16 +17,30 @@
     from note
     where nid = #{nid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+  <select id="findByUid" resultType="com.mr.mybatis.model.Note">
+    select * from note where uid=#{uid}
+  </select>
+
+  <select id="findByNid" resultType="com.mr.mybatis.model.Note">
+    select * from note where nid=#{nid}
+  </select>
+
+
+  <delete id="deleteByNid" parameterType="java.lang.Integer" >
     delete from note
     where nid = #{nid,jdbcType=INTEGER}
   </delete>
+
+
+
   <insert id="insert" parameterType="com.mr.mybatis.model.Note" >
-    insert into note (nid, uid, date, 
-      text)
-    values (#{nid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
-      #{text,jdbcType=VARCHAR})
+    insert into note (uid, date, title,text)
+    values (#{uid,jdbcType=VARCHAR}, #{date,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},#{text,jdbcType=VARCHAR})
   </insert>
+
+
   <insert id="insertSelective" parameterType="com.mr.mybatis.model.Note" >
     insert into note
     <trim prefix="(" suffix=")" suffixOverrides="," >

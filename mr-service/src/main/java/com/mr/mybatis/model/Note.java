@@ -1,14 +1,10 @@
 package com.mr.mybatis.model;
 
-import java.util.Date;
-
 public class Note {
     private Integer nid;
-
-    private Integer uid;
-
-    private Date date;
-
+    private String uid;
+    private String date;
+    private String title;
     private String text;
 
     public Integer getNid() {
@@ -19,20 +15,28 @@ public class Note {
         this.nid = nid;
     }
 
-    public Integer getUid() {
+    public String getUid() {
         return uid;
     }
 
-    public void setUid(Integer uid) {
+    public void setUid(String uid) {
         this.uid = uid;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getText() {
@@ -41,5 +45,16 @@ public class Note {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Note{" +
+                "nid=" + nid +
+                ", uid='" + uid + '\'' +
+                ", date='" + date + '\'' +
+                ", title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }
