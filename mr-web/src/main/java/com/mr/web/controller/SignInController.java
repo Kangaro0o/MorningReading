@@ -33,9 +33,6 @@ public class SignInController {
     @Autowired
     private SignInService signInService;
 
-    @Autowired
-    private PasswordService passwordService;
-
     /**
      * 用户是否在某天已经签到
      */
@@ -83,24 +80,5 @@ public class SignInController {
     public Result<List<String>> getList(@PathVariable("id") String id) {
         List<String> res = signInService.getList(id);
         return new Result<>(ResultStatus.SUCCESS, res);
-    }
-
-    /**
-     * 匹配打卡密码是否匹配
-     */
-    @ResponseBody
-    @PostMapping("/validatePwd")
-    public Result validatePwd(@RequestParam(value = "password") String password) {
-        Result result = new Result();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date today = new Date(System.currentTimeMillis());
-        if (passwordService.validate(password, sdf.format(today))) {
-            result.setCode(ResultStatus.SUCCESS.value());
-            result.setMessage("密码验证成功");
-        } else {
-            result.setCode(ResultStatus.ERROR.value());
-            result.setMessage("密码验证失败");
-        }
-        return result;
     }
 }

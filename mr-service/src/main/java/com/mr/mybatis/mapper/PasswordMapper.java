@@ -18,5 +18,7 @@ public interface PasswordMapper {
 
     int updateByPrimaryKey(Password record);
 
-    Integer findByPwdAndTime(@Param("pwd") String pwd,@Param("today") Date today);
+    Integer findByPwdAndTime(@Param("pwd") String pwd,@Param("today") String today);
+
+    String findByTime(@Param("date") String date);
 }

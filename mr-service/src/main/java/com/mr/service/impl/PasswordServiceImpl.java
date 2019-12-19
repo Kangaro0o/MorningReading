@@ -1,6 +1,7 @@
 package com.mr.service.impl;
 
 import com.mr.mybatis.mapper.PasswordMapper;
+import com.mr.mybatis.model.Password;
 import com.mr.service.PasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,16 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public boolean validate(String password, String today) {
-        try {
-            Integer res = passwordMapper.findByPwdAndTime(password, DateFormat.getDateInstance().parse(today));
-            return res != null;
-        } catch (ParseException e) {
-            return false;
-        }
+        return passwordMapper.findByPwdAndTime(password, today) != null;
+    }
+
+    @Override
+    public boolean genKey(Password password) {
+        return passwordMapper.insert(password) != 0;
+    }
+
+    @Override
+    public String isGen(String date) {
+        return passwordMapper.findByTime(date);
     }
 }
