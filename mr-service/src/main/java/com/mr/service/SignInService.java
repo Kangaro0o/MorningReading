@@ -1,9 +1,8 @@
 package com.mr.service;
 
+import com.mr.mybatis.dto.SingleSignInResult;
 import com.mr.mybatis.model.SignIn;
 
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author LiuWen
@@ -23,5 +22,5 @@ public interface SignInService {
     /**
      * 获取用户uid的所有签到记录
      */
-    List<String> getList(String uid);
+    SingleSignInResult getList(String uid);
 }

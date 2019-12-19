@@ -6,8 +6,15 @@
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="SingleSignInMap" type="com.mr.mybatis.dto.SingleSignInResult">
+    <collection property="checkdatearr" ofType="java.lang.String" javaType="java.util.List">
+      <result column="time"/>
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List" >
-    sid, uid, time
+    sid, uid, `time`
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -74,9 +81,9 @@
     where uid = #{uid} and `time` = #{time}
   </select>
 
-  <select id="getList" resultType="com.mr.mybatis.model.SignIn" parameterType="string">
+  <select id="getList" resultMap="SingleSignInMap" parameterType="string">
     select
-    <include refid="Base_Column_List" />
+    `time`
     from sign_in
     where uid = #{uid}
   </select>

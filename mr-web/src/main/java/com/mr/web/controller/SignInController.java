@@ -1,7 +1,9 @@
 package com.mr.web.controller;
 
+import com.mr.adapter.DateTimeAdapter;
 import com.mr.common.Result;
 import com.mr.common.ResultStatus;
+import com.mr.mybatis.dto.SingleSignInResult;
 import com.mr.mybatis.model.SignIn;
 import com.mr.service.PasswordService;
 import com.mr.service.SignInService;
@@ -45,13 +47,12 @@ public class SignInController {
     /**
      * 签到
      */
-    @PostMapping(value = "/signIn/uid/{uid}")
+    @PostMapping(value = "/addcheckinnewtime/userid/{userid}/newtime/{newtime}")
     @ResponseBody
-    public Result<Boolean> signIn(@PathVariable("uid") String uid) {
+    public Result<Boolean> signIn(@PathVariable("userid") String uid, @PathVariable("newtime") Integer newtime) {
         Result<Boolean> result = new Result<>();
         // 判断是否已经签到
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String today = sdf.format(new Date(System.currentTimeMillis()));
+        String today = new DateTimeAdapter().intDateToStr(newtime);
         // 组装SignIn对象
         SignIn signIn = new SignIn();
         signIn.setUid(uid);
@@ -76,9 +77,9 @@ public class SignInController {
      * 获取某个用户的所有签到列表
      */
     @ResponseBody
-    @GetMapping(value = "/getSignList/id/{id}")
-    public Result<List<String>> getList(@PathVariable("id") String id) {
-        List<String> res = signInService.getList(id);
+    @GetMapping(value = "/getcheckinarr/uid/{uid}")
+    public Result<SingleSignInResult> getList(@PathVariable("uid") String uid) {
+        SingleSignInResult res = signInService.getList(uid);
         return new Result<>(ResultStatus.SUCCESS, res);
     }
 }

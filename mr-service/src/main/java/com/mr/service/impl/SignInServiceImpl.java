@@ -1,5 +1,7 @@
 package com.mr.service.impl;
 
+import com.mr.adapter.DateTimeAdapter;
+import com.mr.mybatis.dto.SingleSignInResult;
 import com.mr.mybatis.mapper.SignInMapper;
 import com.mr.mybatis.model.SignIn;
 import com.mr.service.SignInService;
@@ -39,15 +41,16 @@ public class SignInServiceImpl implements SignInService {
     }
 
     @Override
-    public List<String> getList(String uid) {
-        List<SignIn> lists =  signInMapper.getList(uid);
-        // 修改时间格式
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        List<String> res = new ArrayList<>();
-        for (SignIn signIn : lists) {
-            res.add(signIn.getTime());
+    public SingleSignInResult getList(String uid) {
+        SingleSignInResult result =  signInMapper.getList(uid);
+        DateTimeAdapter dta = new DateTimeAdapter();
+        List<String> checkArr = new ArrayList<>();
+        for (String str : result.getCheckdatearr()) {
+            checkArr.add(dta.strDateToInt(str) + "");
         }
-        return res;
+        result.setCount(result.getCheckdatearr().size());
+        result.setCheckdatearr(checkArr);
+        return result;
     }
 
 
