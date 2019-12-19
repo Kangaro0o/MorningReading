@@ -1,13 +1,11 @@
 package com.mr.mybatis.model;
 
-import java.util.Date;
-
 public class SignIn {
     private Integer sid;
 
     private String uid;
 
-    private Date time;
+    private String time;
 
     public Integer getSid() {
         return sid;
@@ -25,11 +23,11 @@ public class SignIn {
         this.uid = uid;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

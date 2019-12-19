@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.mr.mybatis.model.SignIn" >
     <id column="sid" property="sid" jdbcType="INTEGER" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
-    <result column="time" property="time" jdbcType="DATE" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     sid, uid, time
@@ -20,8 +20,8 @@
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mr.mybatis.model.SignIn" >
-    insert into sign_in (sid, uid, time)
-    values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{time,jdbcType=DATE})
+    insert into sign_in (uid, `time`)
+    values (#{uid}, #{time})
   </insert>
   <insert id="insertSelective" parameterType="com.mr.mybatis.model.SignIn" >
     insert into sign_in
@@ -67,11 +67,11 @@
     where sid = #{sid,jdbcType=INTEGER}
   </update>
 
-  <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="select" resultType="integer" parameterType="com.mr.mybatis.model.SignIn" >
     select
-    count (sid)
+    count(sid)
     from sign_in
-    where uid = #{uid}
+    where uid = #{uid} and `time` = #{time}
   </select>
 
   <select id="getList" resultType="com.mr.mybatis.model.SignIn" parameterType="string">
