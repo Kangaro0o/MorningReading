@@ -34,8 +34,6 @@ public class Material {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
-
-
     public String getUid() {
         return uid;
     }

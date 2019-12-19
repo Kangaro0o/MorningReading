@@ -8,6 +8,14 @@
     <result column="uid" property="uid" jdbcType="VARCHAR" />
     <result column="upload_time" property="uploadTime" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="MaterialListResultMap" type="com.mr.mybatis.dto.MaterialListResult">
+    <result column="upload_time" property="date" />
+    <collection property="articles" ofType="com.mr.mybatis.bo.Article" >
+      <id property="contentId" column="mid" />
+      <result property="title" column="name" />
+    </collection>
+  </resultMap>
+
   <sql id="Base_Column_List" >
      name, file_path, uid,upload_time
   </sql>
@@ -85,4 +93,10 @@
       uid = #{uid,jdbcType=VARCHAR}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
+
+  <select id="getAll" resultMap="MaterialListResultMap" resultType="list">
+    select mid, `name`, upload_time
+    from material
+    order by mid desc
+  </select>
 </mapper>
