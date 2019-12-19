@@ -1,9 +1,6 @@
 package com.mr.service;
 
-import com.mr.common.Result;
 import com.mr.mybatis.model.Note;
-import org.aspectj.weaver.ast.Not;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
