@@ -16,4 +16,9 @@ public interface MaterialService {
     List<MaterialListResult> getAllList();
 
     Material findById(Integer id);
+
+    public boolean uploadMaterial(Material material);
+
+    public boolean createActivity(Material material);
+
 }

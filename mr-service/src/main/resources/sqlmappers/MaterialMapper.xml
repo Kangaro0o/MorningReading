@@ -6,6 +6,7 @@
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="file_path" property="filePath" jdbcType="VARCHAR" />
     <result column="uid" property="uid" jdbcType="VARCHAR" />
+    <result column="upload_time" property="uploadTime" jdbcType="VARCHAR" />
   </resultMap>
   <resultMap id="MaterialListResultMap" type="com.mr.mybatis.dto.MaterialListResult">
     <result column="upload_time" property="date" />
@@ -17,55 +18,61 @@
 
   <sql id="Base_Column_List" >
     mid, name, file_path, uid
+     name, file_path, uid,upload_time
   </sql>
 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from material
+    where mid = #{mid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from material
     where mid = #{mid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mr.mybatis.model.Material" >
-    insert into material (mid, name, file_path, 
-      auido_path, uid)
-    values (#{mid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, 
-      #{auidoPath,jdbcType=VARCHAR}, #{uid,jdbcType=VARCHAR})
-  </insert>
+
+
+  <update id="upload" parameterType="com.mr.mybatis.model.Material" >
+    update material
+  set  name =#{name}, file_path=#{filePath}
+  where mid=#{mid}
+</update>
+
+
   <insert id="insertSelective" parameterType="com.mr.mybatis.model.Material" >
     insert into material
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="mid != null" >
-        mid,
-      </if>
       <if test="name != null" >
         name,
       </if>
       <if test="filePath != null" >
         file_path,
       </if>
-      <if test="auidoPath != null" >
-        auido_path,
-      </if>
       <if test="uid != null" >
         uid,
       </if>
+      <if test="uploadTime != null" >
+        upload_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="mid != null" >
-        #{mid,jdbcType=INTEGER},
-      </if>
+
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="filePath != null" >
         #{filePath,jdbcType=VARCHAR},
       </if>
-      <if test="auidoPath != null" >
-        #{auidoPath,jdbcType=VARCHAR},
-      </if>
       <if test="uid != null" >
         #{uid,jdbcType=VARCHAR},
       </if>
+      <if test="uploadTime != null" >
+        #{uploadTime,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.mr.mybatis.model.Material" >
     update material
     <set >
@@ -74,9 +81,6 @@
       </if>
       <if test="filePath != null" >
         file_path = #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="auidoPath != null" >
-        auido_path = #{auidoPath,jdbcType=VARCHAR},
       </if>
       <if test="uid != null" >
         uid = #{uid,jdbcType=VARCHAR},
@@ -88,7 +92,6 @@
     update material
     set name = #{name,jdbcType=VARCHAR},
       file_path = #{filePath,jdbcType=VARCHAR},
-      auido_path = #{auidoPath,jdbcType=VARCHAR},
       uid = #{uid,jdbcType=VARCHAR}
     where mid = #{mid,jdbcType=INTEGER}
   </update>
