@@ -79,4 +79,10 @@
       real_name = #{realName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="getInfo" resultType="com.mr.mybatis.model.User" parameterType="string">
+    select id, `name`, role, real_name
+    from user
+    where id = #{uid}
+  </select>
 </mapper>

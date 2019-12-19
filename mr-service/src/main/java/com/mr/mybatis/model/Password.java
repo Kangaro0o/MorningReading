@@ -1,6 +1,5 @@
 package com.mr.mybatis.model;
 
-import java.util.Date;
 
 public class Password {
     private Integer pid;
@@ -9,7 +8,7 @@ public class Password {
 
     private String pwd;
 
-    private Date time;
+    private String time;
 
     public Integer getPid() {
         return pid;
@@ -35,11 +34,11 @@ public class Password {
         this.pwd = pwd;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }
