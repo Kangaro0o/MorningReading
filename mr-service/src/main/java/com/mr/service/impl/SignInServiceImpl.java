@@ -23,9 +23,8 @@ public class SignInServiceImpl implements SignInService {
     private SignInMapper signInMapper;
 
     @Override
-    public int signIn(String uid, String pwd) {
-        // TODO
-        return 0;
+    public boolean signIn(SignIn signIn) {
+        return signInMapper.insert(signIn) != 0;
     }
 
     /**
@@ -35,11 +34,7 @@ public class SignInServiceImpl implements SignInService {
     public boolean isSign(String uid, String time) {
         SignIn signIn = new SignIn();
         signIn.setUid(uid);
-        try {
-            signIn.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(time));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        signIn.setTime(time);
         return signInMapper.select(signIn) != 0;
     }
 
@@ -47,10 +42,10 @@ public class SignInServiceImpl implements SignInService {
     public List<String> getList(String uid) {
         List<SignIn> lists =  signInMapper.getList(uid);
         // 修改时间格式
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         List<String> res = new ArrayList<>();
         for (SignIn signIn : lists) {
-            res.add(sdf.format(signIn.getTime()));
+            res.add(signIn.getTime());
         }
         return res;
     }

@@ -31,8 +31,8 @@ public class MainController {
         SignIn signIn = new SignIn();
         signIn.setUid("abc");
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateTime = sdf.parse("2019-10-01");
-        signIn.setTime(dateTime);
+//        Date dateTime = sdf.parse("2019-10-01");
+        signIn.setTime("2019-10-01");
         return signInMapper.insert(signIn);
     }
 

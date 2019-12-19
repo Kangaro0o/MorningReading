@@ -12,10 +12,8 @@ import java.util.List;
 public interface SignInService {
     /**
      * 签到
-     * @param uid 用户id
-     * @param pwd 签到密码
      */
-    int signIn(String uid, String pwd);
+    boolean signIn(SignIn signIn);
 
     /**
      * 用户是否已经签到
