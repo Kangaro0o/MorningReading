@@ -8,7 +8,7 @@ import java.util.List;
 public interface MaterialMapper {
     int deleteByPrimaryKey(Integer mid);
 
-    int insert(Material record);
+    int upload(Material material);
 
     int insertSelective(Material record);
 

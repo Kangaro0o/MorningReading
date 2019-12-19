@@ -13,4 +13,9 @@ public interface MaterialService {
      * 获取所有的晨读材料列表
      */
     List<MaterialListResult> getAllList();
+  
+    public boolean uploadMaterial(Material material);
+
+    public boolean createActivity(Material material);
+
 }

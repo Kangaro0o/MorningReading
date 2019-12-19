@@ -9,6 +9,8 @@ public class Material {
 
     private String uid;
 
+    private String uploadTime;
+
     public Integer getMid() {
         return mid;
     }
@@ -32,12 +34,19 @@ public class Material {
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
-
     public String getUid() {
         return uid;
     }
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getUploadTime() {
+        return uploadTime;
+    }
+
+    public void setUploadTime(String uploadTime) {
+        this.uploadTime = uploadTime;
     }
 }
