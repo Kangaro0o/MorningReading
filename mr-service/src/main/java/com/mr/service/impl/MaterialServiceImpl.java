@@ -5,8 +5,6 @@ import com.mr.mybatis.dto.MaterialListResult;
 import com.mr.mybatis.mapper.MaterialMapper;
 import com.mr.mybatis.model.Material;
 
-import com.mr.mybatis.model.Material;
-
 import com.mr.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
