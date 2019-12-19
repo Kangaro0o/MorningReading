@@ -1,5 +1,6 @@
 package com.mr.mybatis.mapper;
 
+import com.mr.mybatis.dto.SingleSignInResult;
 import com.mr.mybatis.model.SignIn;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,5 @@ public interface SignInMapper {
     /**
      * 查找id对应的用户的签到记录
      */
-    List<SignIn> getList(String uid);
+    SingleSignInResult getList(String uid);
 }
