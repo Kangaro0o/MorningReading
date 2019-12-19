@@ -17,8 +17,10 @@
   </resultMap>
 
   <sql id="Base_Column_List" >
+    mid, name, file_path, uid
      name, file_path, uid,upload_time
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
@@ -98,5 +100,12 @@
     select mid, `name`, upload_time
     from material
     order by mid desc
+  </select>
+
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from material
+    where mid = #{mid,jdbcType=INTEGER}
   </select>
 </mapper>

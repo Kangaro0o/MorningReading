@@ -3,10 +3,12 @@ package com.mr.web.controller;
 import com.mr.common.Result;
 import com.mr.common.ResultStatus;
 import com.mr.mybatis.dto.MaterialListResult;
+import com.mr.mybatis.model.Material;
 import com.mr.service.MaterialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,5 +30,19 @@ public class MaterialController {
     @ResponseBody
     public Result<List<MaterialListResult>> articleList() {
         return new Result<>(ResultStatus.SUCCESS, materialService.getAllList());
+    }
+    
+    /**
+     * 查询文件详情
+     */
+    @GetMapping("/articleDetail/{articleId}")
+    @ResponseBody
+    public Result articleDetail(@PathVariable("articleId") Integer articleId) {
+        Material material = materialService.findById(articleId);
+        Result<Material> result = new Result<>();
+        result.setCode(ResultStatus.SUCCESS.value());
+        result.setMessage("查询成功");
+        result.setData(material);
+        return result;
     }
 }
