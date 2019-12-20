@@ -2,6 +2,7 @@ package com.mr.web.controller;
 
 import com.mr.common.Result;
 import com.mr.common.ResultStatus;
+import com.mr.mybatis.bo.ArticleDetail;
 import com.mr.mybatis.dto.MaterialListResult;
 import com.mr.mybatis.model.Material;
 import com.mr.service.MaterialService;
@@ -37,12 +38,18 @@ public class MaterialController {
      */
     @GetMapping("/articleDetail/{articleId}")
     @ResponseBody
-    public Result articleDetail(@PathVariable("articleId") Integer articleId) {
-        Material material = materialService.findByMid(articleId);
-        Result<Material> result = new Result<>();
-        result.setCode(ResultStatus.SUCCESS.value());
-        result.setMessage("查询成功");
-        result.setData(material);
+    public Result<ArticleDetail> articleDetail(@PathVariable("articleId") Integer articleId) {
+        Result<ArticleDetail> result = new Result<>();
+        ArticleDetail articleDetail = materialService.getArticleDetail(articleId);
+        if ("type_error".equals(articleDetail.getContent())) {
+            // 解析错误
+            result.setCode(ResultStatus.ERROR.value());
+            result.setMessage("服务器发生异常，请稍后重试");
+        } else {
+            result.setCode(ResultStatus.SUCCESS.value());
+            result.setMessage("操作成功");
+            result.setData(articleDetail);
+        }
         return result;
     }
 }
