@@ -1,5 +1,6 @@
 package com.mr.service;
 
+import com.mr.mybatis.bo.ArticleDetail;
 import com.mr.mybatis.dto.MaterialListResult;
 import com.mr.mybatis.model.Material;
 
@@ -16,6 +17,8 @@ public interface MaterialService {
     List<MaterialListResult> getAllList();
 
     Material findById(Integer id);
+
+    ArticleDetail getArticleDetail(Integer articleId);
 
     public boolean uploadMaterial(Material material);
 
