@@ -37,4 +37,16 @@ public class DateTimeAdapter {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
+
+    /***
+     * 将包含日期的字符串转换成特定格式的日期字符串：yyyy-MM-dd
+     * @param str：日期
+     * @return ：返回如2019-02-08格式的字符串
+     */
+    public String dateFormat(String str) throws ParseException {
+        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=dateFormat.parse(str);
+        str=dateFormat.format(date);
+        return str;
+    }
 }

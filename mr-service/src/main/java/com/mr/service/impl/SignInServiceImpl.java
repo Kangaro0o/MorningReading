@@ -53,5 +53,10 @@ public class SignInServiceImpl implements SignInService {
         return result;
     }
 
+    @Override
+    public List<String> findUidByDate(String date) {
+        return signInMapper.findUidByDate(date);
+    }
+
 
 }

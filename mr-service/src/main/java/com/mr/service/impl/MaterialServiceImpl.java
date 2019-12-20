@@ -28,13 +28,13 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Material findById(Integer id) {
-        return materialMapper.findById(id);
+    public Material findByMid(Integer mid) {
+        return materialMapper.findByMid(mid);
     }
 
     @Override
     public ArticleDetail getArticleDetail(Integer articleId) {
-        Material material = findById(articleId);
+        Material material = findByMid(articleId);
         ArticleDetail articleDetail = new ArticleDetail();
         String content = DocUtil.doc2String(material.getFilePath());
         articleDetail.setTitle(material.getName());
@@ -52,5 +52,10 @@ public class MaterialServiceImpl implements MaterialService {
     @Override
     public boolean createActivity(Material material) {
         return materialMapper.insertSelective(material)!=0;
+    }
+
+    @Override
+    public List<Material> findAll() {
+        return materialMapper.findAll();
     }
 }

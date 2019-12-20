@@ -2,6 +2,7 @@ package com.mr.mybatis.mapper;
 
 import com.mr.mybatis.dto.MaterialListResult;
 import com.mr.mybatis.model.Material;
+import org.omg.CORBA.MARSHAL;
 
 import java.util.List;
 
@@ -24,5 +25,10 @@ public interface MaterialMapper {
     /**
      * 根据id查询晨读材料详情
      */
-    Material findById(Integer mid);
+    Material findByMid(Integer mid);
+
+    /***
+     * 查询晨读材料列表
+     */
+    List<Material> findAll();
 }
