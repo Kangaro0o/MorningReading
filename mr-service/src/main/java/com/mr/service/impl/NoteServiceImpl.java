@@ -39,4 +39,9 @@ public class NoteServiceImpl implements NoteService {
 
         return noteMapper.deleteByNid(nid)!=0;
     }
+
+    @Override
+    public boolean updateNote(Note note) {
+        return noteMapper.updateByPrimaryKeySelective(note)!=0;
+    }
 }

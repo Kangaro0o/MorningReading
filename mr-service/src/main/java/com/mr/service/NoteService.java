@@ -14,4 +14,5 @@ public interface NoteService {
     public List<Note> findByUid(String uid);
     public Note findByNid(Integer nid);
     public boolean deleteByNid(Integer nid);
+    public boolean updateNote(Note note);
 }

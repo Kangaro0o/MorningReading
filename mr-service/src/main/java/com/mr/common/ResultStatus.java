@@ -25,6 +25,8 @@ public enum ResultStatus {
     //日期格式错误
     DATE_FORMAT_ERROR(1400,"date format error"),
 
+    //
+    USER_HAS_EXISTED(1300,"user has existed"),
     //搜索结果不存在
     USER_NOT_EXISTS(1401, "user not exists"),
     PERMISSION_DENIED(1402,"permission denied"),

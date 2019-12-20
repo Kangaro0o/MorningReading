@@ -26,6 +26,7 @@
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, 
       #{realName,jdbcType=VARCHAR})
   </insert>
+
   <insert id="insertSelective" parameterType="com.mr.mybatis.model.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
