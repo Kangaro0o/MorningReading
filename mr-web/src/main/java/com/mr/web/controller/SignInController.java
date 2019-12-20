@@ -47,7 +47,7 @@ public class SignInController {
     /**
      * 签到
      */
-    @PostMapping(value = "/addcheckinnewtime/userid/{userid}/newtime/{newtime}")
+    @GetMapping(value = "/addcheckinnewtime/{userid}/{newtime}")
     @ResponseBody
     public Result<Boolean> signIn(@PathVariable("userid") String uid, @PathVariable("newtime") Integer newtime) {
         Result<Boolean> result = new Result<>();
@@ -77,7 +77,7 @@ public class SignInController {
      * 获取某个用户的所有签到列表
      */
     @ResponseBody
-    @GetMapping(value = "/getcheckinarr/userid/{userid}")
+    @GetMapping(value = "/getcheckinarr/{userid}")
     public Result<SingleSignInResult> getList(@PathVariable("userid") String uid) {
         SingleSignInResult res = signInService.getList(uid);
         return new Result<>(ResultStatus.SUCCESS, res);

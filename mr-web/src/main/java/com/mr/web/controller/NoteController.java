@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -33,7 +33,7 @@ public class NoteController {
      */
     @RequestMapping(value = "/savenote", method = RequestMethod.POST)
     @ResponseBody
-    public Result<Boolean> saveNote(Note note){
+    public Result<Boolean> saveNote(@RequestBody Note note){
         System.out.println(note);
         Result<Boolean> result=new Result<>();
         if(!noteService.saveNote(note)){
@@ -55,9 +55,9 @@ public class NoteController {
         List<Note> notes=noteService.findByUid(uid);
         Result<List<Note>> result ;
         if(notes.size()==0){
-            result =new Result<>(ResultStatus.ARTICLE_NOT_EXIST);
+            result =new Result<>(ResultStatus.ARTICLE_NOT_EXIST,null);
         }else {
-            result=new Result<>(ResultStatus.SUCCESS);
+            result=new Result<>(ResultStatus.SUCCESS,notes);
         }
 
         return result;
@@ -74,7 +74,7 @@ public class NoteController {
         Note note=noteService.findByNid(nid);
         Result<Note> result;
         if(note==null){
-            result=new Result<>(ResultStatus.ARTICLE_HAS_BEEN_DELETED);
+            result=new Result<>(ResultStatus.ARTICLE_HAS_BEEN_DELETED,null);
         }else {
             result=new Result<>(ResultStatus.SUCCESS,note);
         }
@@ -98,4 +98,22 @@ public class NoteController {
        }
        return result;
     }
+
+    /***
+     * 根据nid修改对应的备忘录内容
+     * @param note
+     * @return
+     */
+    @RequestMapping(value = "/updateNote",method = RequestMethod.POST)
+    @ResponseBody
+    public Result<Boolean> updateNote(@RequestBody Note note){
+        Result<Boolean> result;
+        if(noteService.updateNote(note)){
+            result=new Result<>(ResultStatus.SUCCESS,true);
+        }else {
+            result=new Result<>(ResultStatus.ERROR,false);
+        }
+       return result;
+    }
+
 }

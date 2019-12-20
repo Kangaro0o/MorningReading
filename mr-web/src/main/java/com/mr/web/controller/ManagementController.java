@@ -4,11 +4,9 @@ import com.mr.adapter.DateTimeAdapter;
 import com.mr.common.Result;
 import com.mr.common.ResultStatus;
 import com.mr.mybatis.dto.ActivityResult;
-import com.mr.mybatis.mapper.SignInMapper;
 import com.mr.mybatis.model.Material;
 import com.mr.service.MaterialService;
 import com.mr.service.SignInService;
-import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -43,7 +41,8 @@ public class ManagementController {
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
     public Result<Boolean> upload(@RequestParam("file") MultipartFile file,
-                                  @RequestParam("mid")Integer mid, HttpServletRequest request) {
+                                  @RequestParam("mid")Integer mid,
+                                  HttpServletRequest request) {
 
         //获取文件存储位置
         String path=request.getSession().getServletContext().getRealPath("materials");

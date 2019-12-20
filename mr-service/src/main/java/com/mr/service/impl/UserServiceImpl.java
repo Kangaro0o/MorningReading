@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
     public User getUser(String uid) {
         return userMapper.getInfo(uid);
     }
+
+    @Override
+    public boolean addUser(User user) {
+        return userMapper.insert(user)!=0;
+    }
 }
