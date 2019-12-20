@@ -1,9 +1,14 @@
 package com.mr.web.controller;
 
+import com.mr.adapter.DateTimeAdapter;
 import com.mr.common.Result;
 import com.mr.common.ResultStatus;
+import com.mr.mybatis.dto.ActivityResult;
+import com.mr.mybatis.mapper.SignInMapper;
 import com.mr.mybatis.model.Material;
 import com.mr.service.MaterialService;
+import com.mr.service.SignInService;
+import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,23 +36,23 @@ public class ManagementController {
 
     @Autowired
     private MaterialService materialService;
+    @Autowired
+    private SignInService signInService;
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
-    public Result<String> upload(@RequestParam("file") MultipartFile file,
+    public Result<Boolean> upload(@RequestParam("file") MultipartFile file,
                                   @RequestParam("mid")Integer mid, HttpServletRequest request) {
 
         //获取文件存储位置
         String path=request.getSession().getServletContext().getRealPath("materials");
-//        System.out.println(path);
-        //加上唯一前缀
         String originalFileName=file.getOriginalFilename();
         String filename=UUID.randomUUID().toString()+originalFileName;
         File newFile=new File(path,filename);
         if(!newFile.exists()){
             newFile.mkdirs();
         }
-        Result<String> result;
+        Result<Boolean> result;
 
         try {
             //转存文件
@@ -58,9 +63,9 @@ public class ManagementController {
             material.setMid(mid);
             material.setFilePath(path+"\\"+filename);
             if(materialService.uploadMaterial(material)){
-                result=new Result<>(ResultStatus.SUCCESS,"上传成功");
+                result=new Result<>(ResultStatus.SUCCESS,true);
             }else {
-                result=new Result<>(ResultStatus.ERROR,"数据写入失败");
+                result=new Result<>(ResultStatus.DATE_FORMAT_ERROR,false);
                 //数据写入失败，删除刚刚上传的文件
                 File f=new File(path);
                 File[] lists=f.listFiles();
@@ -73,7 +78,7 @@ public class ManagementController {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-            result=new Result<>(ResultStatus.ERROR,"IOException");
+            result=new Result<>(ResultStatus.UPLOAD_ERROR,false);
             newFile.delete();
             return result;
         }
@@ -82,25 +87,56 @@ public class ManagementController {
     }
 
     /***
-     * 创建活动，晨读表中值写入日期和创建者信息
+     * 创建活动，写入日期和创建者信息
      * @param date
      * @param uid
      * @return
      */
     @RequestMapping(value = "/createActivity",method = RequestMethod.POST)
     @ResponseBody
-    public Result<String> createActivity(@RequestParam("date") String date,
+    public Result<Boolean> createActivity(@RequestParam("date") String date,
                                          @RequestParam("uid") String uid){
+        Result<Boolean> result;
+        //转换日期格式
+        DateTimeAdapter dateTimeAdapter=new DateTimeAdapter();
+        try {
+            date=dateTimeAdapter.dateFormat(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            result=new Result<>(ResultStatus.DATE_FORMAT_ERROR,false);
+        }
+
         Material material=new Material();
         material.setUploadTime(date);
         material.setUid(uid);
-        Result<String> result;
+
         if(materialService.createActivity(material)){
-            result =new Result<>(ResultStatus.SUCCESS,"创建成功！");
+            result =new Result<>(ResultStatus.SUCCESS,true);
         }else{
-            result=new Result<>(ResultStatus.ERROR,"创建失败");
+            result=new Result<>(ResultStatus.DATABASE_WRITE_ERROR,false);
         }
         return result;
+    }
+
+    @RequestMapping(value = "/activityResult",method = RequestMethod.GET)
+    @ResponseBody
+    public Result<ActivityResult> activityResult(@RequestParam("mid") Integer mid){
+        Result<ActivityResult> result;
+        ActivityResult activityResult=new ActivityResult();
+        //查询上传的文件名
+        Material material=materialService.findByMid(mid);
+        //查询当天签到的人员名单
+        List<String> signList=signInService.findUidByDate(material.getUploadTime());
+        //将结果存入对象
+        activityResult.setFileName(material.getName());
+        activityResult.setSignList(signList);
+        //封装返回对象
+        result=new Result<>(ResultStatus.SUCCESS,activityResult);
+        return result ;
+
+
+
+
     }
 
 

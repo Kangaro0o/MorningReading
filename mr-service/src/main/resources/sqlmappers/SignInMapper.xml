@@ -87,4 +87,9 @@
     from sign_in
     where uid = #{uid}
   </select>
+    <select id="findUidByDate" resultType="java.lang.String">
+      select uid
+      from sign_in
+      where time =#{date}
+    </select>
 </mapper>

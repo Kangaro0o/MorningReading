@@ -38,7 +38,7 @@ public class MaterialController {
     @GetMapping("/articleDetail/{articleId}")
     @ResponseBody
     public Result articleDetail(@PathVariable("articleId") Integer articleId) {
-        Material material = materialService.findById(articleId);
+        Material material = materialService.findByMid(articleId);
         Result<Material> result = new Result<>();
         result.setCode(ResultStatus.SUCCESS.value());
         result.setMessage("查询成功");

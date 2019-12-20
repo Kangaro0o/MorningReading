@@ -24,5 +24,5 @@ public interface MaterialMapper {
     /**
      * 根据id查询晨读材料详情
      */
-    Material findById(Integer mid);
+    Material findByMid(Integer mid);
 }

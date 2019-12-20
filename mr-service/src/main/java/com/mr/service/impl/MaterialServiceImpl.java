@@ -26,12 +26,12 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
-    public Material findById(Integer id) {
-        return materialMapper.findById(id);
+    public Material findByMid(Integer mid) {
+        return materialMapper.findByMid(mid);
     }
 
 
-   @Override
+    @Override
     public boolean uploadMaterial(Material material) {
         return materialMapper.upload(material)!=0;
     }

@@ -15,6 +15,15 @@ public enum ResultStatus {
 
     UNKNOWN(999, "unknown"),//未知错误
 
+    //数据库写入错误
+    DATABASE_WRITE_ERROR(1000,"fail to create "),
+
+    //文件上传失败
+    UPLOAD_ERROR(1001,"fail to upload"),
+
+    //日期格式错误
+    DATE_FORMAT_ERROR(1400,"date format error"),
+
     //搜索结果不存在
     USER_NOT_EXISTS(1401, "user not exists"),
     PERMISSION_DENIED(1402,"permission denied"),

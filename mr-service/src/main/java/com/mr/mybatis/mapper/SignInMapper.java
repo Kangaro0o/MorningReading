@@ -26,4 +26,9 @@ public interface SignInMapper {
      * 查找id对应的用户的签到记录
      */
     SingleSignInResult getList(String uid);
+
+    /***
+     * 找到某天签到的用户名
+     */
+    List<String> findUidByDate(String date);
 }

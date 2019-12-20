@@ -15,10 +15,12 @@ public interface MaterialService {
      */
     List<MaterialListResult> getAllList();
 
-    Material findById(Integer id);
+    Material findByMid(Integer mid);
 
     public boolean uploadMaterial(Material material);
 
     public boolean createActivity(Material material);
+
+
 
 }
