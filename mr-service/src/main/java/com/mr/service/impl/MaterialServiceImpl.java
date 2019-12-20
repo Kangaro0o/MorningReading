@@ -40,4 +40,9 @@ public class MaterialServiceImpl implements MaterialService {
     public boolean createActivity(Material material) {
         return materialMapper.insertSelective(material)!=0;
     }
+
+    @Override
+    public List<Material> findAll() {
+        return materialMapper.findAll();
+    }
 }

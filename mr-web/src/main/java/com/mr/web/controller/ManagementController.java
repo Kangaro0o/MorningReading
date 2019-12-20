@@ -12,6 +12,7 @@ import org.springframework.beans.NotReadablePropertyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,7 +96,7 @@ public class ManagementController {
     @RequestMapping(value = "/createActivity",method = RequestMethod.POST)
     @ResponseBody
     public Result<Boolean> createActivity(@RequestParam("date") String date,
-                                         @RequestParam("uid") String uid){
+                                         @RequestParam(value = "uid",required = false) String uid){
         Result<Boolean> result;
         //转换日期格式
         DateTimeAdapter dateTimeAdapter=new DateTimeAdapter();
@@ -118,9 +119,14 @@ public class ManagementController {
         return result;
     }
 
-    @RequestMapping(value = "/activityResult",method = RequestMethod.GET)
+    /***
+     * 返回某天的晨读材料名称和签到人员名单
+     * @param mid
+     * @return
+     */
+    @RequestMapping(value = "/activityResult/{mid}",method = RequestMethod.GET)
     @ResponseBody
-    public Result<ActivityResult> activityResult(@RequestParam("mid") Integer mid){
+    public Result<ActivityResult> activityResult(@PathVariable("mid") Integer mid){
         Result<ActivityResult> result;
         ActivityResult activityResult=new ActivityResult();
         //查询上传的文件名
@@ -134,11 +140,22 @@ public class ManagementController {
         result=new Result<>(ResultStatus.SUCCESS,activityResult);
         return result ;
 
-
-
-
     }
 
-
+    /***
+     * 获取晨读材料列表（管理员日期列表）
+     * @return
+     */
+    @RequestMapping(value = "/displayActivities",method = RequestMethod.GET)
+    @ResponseBody
+    public Result<List<Material>> displayActivities(){
+        List<Material> materialList=materialService.findAll();
+        Result<List<Material>> result;
+        if(materialList.size()==0){
+            result=new Result<>(ResultStatus.ARTICLE_NOT_EXIST,materialList);
+        }
+        result=new Result<>(ResultStatus.SUCCESS,materialList);
+        return result;
+    }
 
 }

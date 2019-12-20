@@ -106,6 +106,13 @@
     <include refid="Base_Column_List" />
     from material
     where mid = #{mid,jdbcType=INTEGER}
+
   </select>
+  <select id="findAll" resultMap="BaseResultMap" resultType="com.mr.mybatis.model.Material">
+    select mid,upload_time
+    from material
+    order by mid desc
+  </select>
+
 
 </mapper>

@@ -21,6 +21,7 @@ public interface MaterialService {
 
     public boolean createActivity(Material material);
 
+    public List<Material> findAll();
 
 
 }

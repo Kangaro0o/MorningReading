@@ -7,6 +7,7 @@ public enum ResultStatus {
 
     SUCCESS(200, "success"), //成功
 
+
     ERROR(4000, "Error"),       //程序报错
 
     INVALID_SERVICE(199, "invalid service"),//服务不可用
