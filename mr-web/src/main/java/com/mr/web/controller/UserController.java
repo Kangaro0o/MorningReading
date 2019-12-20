@@ -7,6 +7,8 @@ import com.mr.service.UserService;
 import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.rmi.server.UID;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author LiuWen
@@ -68,5 +72,13 @@ public class UserController {
         }
 
         return result;
+    }
+
+    @GetMapping("/adminvalue/{userid}")
+    @ResponseBody
+    public Result<Map<String, Integer>> getUserRole(@PathVariable("userid") String uid) {
+        Map<String, Integer> map = new HashMap<>(1);
+        map.put("admin", userService.getUserRole(uid));
+        return new Result<Map<String, Integer>>(ResultStatus.SUCCESS, map);
     }
 }

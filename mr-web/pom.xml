@@ -7,7 +7,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mr-web</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>mr-web</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

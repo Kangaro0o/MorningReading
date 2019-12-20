@@ -8,7 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mr-service</artifactId>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <name>mr-service</name>
     <url>http://maven.apache.org</url>
     <dependencies>
