@@ -20,6 +20,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int getUserRole(String uid) {
+        User user = getUser(uid);
+        if (user != null) {
+            return user.getRole();
+        } else {
+            user = new User();
+            user.setId(uid);
+            user.setName(uid);
+            user.setRole(1);
+            addUser(user);
+            return user.getRole();
+        }
+    }
+
+
+    @Override
     public boolean addUser(User user) {
         return userMapper.insert(user)!=0;
     }

@@ -12,6 +12,11 @@ public interface UserService {
      */
     User getUser(String uid);
 
+    /**
+     * 查询用户身份
+     */
+    int getUserRole(String uid);
+
     /***
      *用户注册，表中添加该用户信息
      */
