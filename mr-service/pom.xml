@@ -8,6 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mr-service</artifactId>
+    <packaging>jar</packaging>
     <name>mr-service</name>
     <url>http://maven.apache.org</url>
     <dependencies>
