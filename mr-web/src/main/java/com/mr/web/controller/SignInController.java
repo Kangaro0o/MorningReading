@@ -47,9 +47,9 @@ public class SignInController {
     /**
      * 签到
      */
-    @GetMapping(value = "/addcheckinnewtime/{userid}/{newtime}")
+    @GetMapping(value = "/addcheckinnewtime")
     @ResponseBody
-    public Result<Boolean> signIn(@PathVariable("userid") String uid, @PathVariable("newtime") Integer newtime) {
+    public Result<Boolean> signIn(@RequestParam("userid") String uid, @RequestParam("newtime") Integer newtime) {
         Result<Boolean> result = new Result<>();
         // 判断是否已经签到
         String today = new DateTimeAdapter().intDateToStr(newtime);
@@ -77,8 +77,8 @@ public class SignInController {
      * 获取某个用户的所有签到列表
      */
     @ResponseBody
-    @GetMapping(value = "/getcheckinarr/{userid}")
-    public Result<SingleSignInResult> getList(@PathVariable("userid") String uid) {
+    @GetMapping(value = "/getcheckinarr")
+    public Result<SingleSignInResult> getList(@RequestParam("userid") String uid) {
         SingleSignInResult res = signInService.getList(uid);
         return new Result<>(ResultStatus.SUCCESS, res);
     }

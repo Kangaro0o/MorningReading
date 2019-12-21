@@ -13,11 +13,6 @@ import java.util.Date;
 public class DateFormatTest {
     @Test
     public void dateFormateTest() throws ParseException {
-        String str="2019-1-1";
-        String str2="2019-01-01";
-        DateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-        Date date=dateFormat.parse(str2);
-        str2=dateFormat.format(date);
-        System.out.println(str2);
+
     }
 }
