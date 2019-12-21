@@ -73,9 +73,9 @@ public class UserController {
         return result;
     }
 
-    @GetMapping("/adminvalue/{userid}")
+    @GetMapping(value = "/adminvalue")
     @ResponseBody
-    public Result<Map<String, Integer>> getUserRole(@PathVariable("userid") String uid) {
+    public Result<Map<String, Integer>> getUserRole(@RequestParam("userid") String uid) {
         Map<String, Integer> map = new HashMap<>(1);
         map.put("admin", userService.getUserRole(uid));
         return new Result<Map<String, Integer>>(ResultStatus.SUCCESS, map);

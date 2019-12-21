@@ -37,20 +37,19 @@ public class ManagementController {
     private MaterialService materialService;
     @Autowired
     private SignInService signInService;
-
+    public static final String FILE_SEPARATOR = System.getProperty("file.separator");
     @RequestMapping(value = "/upload",method = RequestMethod.POST)
     @ResponseBody
     public Result<Boolean> upload(@RequestParam("file") MultipartFile file,
                                   @RequestParam("mid")Integer mid,
+                                  @RequestParam("filename") String name,
                                   HttpServletRequest request) {
 
         //获取文件存储位置
         String path=request.getSession().getServletContext().getRealPath("materials");
         String originalFileName=file.getOriginalFilename();
         String filename=UUID.randomUUID().toString()+originalFileName;
-        String filePath = path + File.pathSeparator + filename;
-        System.out.println(filePath);
-        File newFile=new File(filePath);
+        File newFile=new File(path,filename);
         if(!newFile.exists()){
             newFile.mkdirs();
         }
@@ -61,9 +60,9 @@ public class ManagementController {
             file.transferTo(newFile);
             //数据库操作
             Material material=new Material();
-            material.setName(originalFileName.substring(0,originalFileName.indexOf(".")));
+            material.setName(name);
             material.setMid(mid);
-            material.setFilePath(path+"\\"+filename);
+            material.setFilePath(path+File.separator+filename);
             if(materialService.uploadMaterial(material)){
                 result=new Result<>(ResultStatus.SUCCESS,true);
             }else {
@@ -99,6 +98,10 @@ public class ManagementController {
     public Result<Boolean> createActivity(@RequestParam("date") String date,
                                          @RequestParam(value = "uid",required = false) String uid){
         Result<Boolean> result;
+        if(date.equals("")){
+            result=new Result<>(ResultStatus.PARAMETER_ILLEGAL,false);
+            return  result;
+        }
         //转换日期格式
         DateTimeAdapter dateTimeAdapter=new DateTimeAdapter();
         try {

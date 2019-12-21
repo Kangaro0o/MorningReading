@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -49,9 +50,9 @@ public class NoteController {
      * @param uid
      * @return 返回备忘录列表
      */
-    @RequestMapping(value = "/findByUid/{uid}",method = RequestMethod.GET)
+    @RequestMapping(value = "/findByUid",method = RequestMethod.GET)
     @ResponseBody
-    public Result<List<Note>> findByUid(@PathVariable(value = "uid") String uid){
+    public Result<List<Note>> findByUid(@RequestParam(value = "uid") String uid){
         List<Note> notes=noteService.findByUid(uid);
         Result<List<Note>> result ;
         if(notes.size()==0){
@@ -59,7 +60,6 @@ public class NoteController {
         }else {
             result=new Result<>(ResultStatus.SUCCESS,notes);
         }
-
         return result;
     }
 
