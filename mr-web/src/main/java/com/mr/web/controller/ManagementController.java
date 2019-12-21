@@ -48,7 +48,7 @@ public class ManagementController {
         String path=request.getSession().getServletContext().getRealPath("materials");
         String originalFileName=file.getOriginalFilename();
         String filename=UUID.randomUUID().toString()+originalFileName;
-        String filePath = path + File.pathSeparator + filename;
+        String filePath = path + File.separator + filename;
         System.out.println(filePath);
         File newFile=new File(filePath);
         if(!newFile.exists()){
