@@ -12,7 +12,7 @@
 
     <properties>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
-        <springframework.version>5.2.2.RELEASE</springframework.version>
+        <springframework.version>5.3.18</springframework.version>
     </properties>
 
 
